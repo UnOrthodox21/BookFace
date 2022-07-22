@@ -28,7 +28,6 @@ public class BookRequestMapper {
         CustomerEntity customerEntity = bookRequestEntity.getCustomer();
         CustomerItem customerItem = customerMapper.toCustomerItem(customerEntity);
 
-
         return new BookRequestItem.Builder()
                 .id(bookRequestEntity.getId())
                 .customer(customerItem)
@@ -54,6 +53,7 @@ public class BookRequestMapper {
 
         BookRequestEntity bookRequestEntity = new BookRequestEntity();
 
+        bookRequestEntity.setId(bookRequestItem.getId());
         bookRequestEntity.setCustomer(customerEntity);
         bookRequestEntity.setAuthor(bookRequestItem.getAuthor());
         bookRequestEntity.setTitle(bookRequestItem.getTitle());

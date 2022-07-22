@@ -1,17 +1,10 @@
 package com.rihards.bookface.mappers;
 
-import com.rihards.bookface.entities.BookRequestEntity;
-import com.rihards.bookface.entities.BorrowPeriodEntity;
 import com.rihards.bookface.entities.CustomerEntity;
-import com.rihards.bookface.items.BookRequestItem;
-import com.rihards.bookface.items.BorrowPeriodItem;
 import com.rihards.bookface.items.CustomerItem;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Lazy;
+
 import org.springframework.stereotype.Component;
 
-import java.util.List;
-import java.util.stream.Collectors;
 
 @Component
 public class CustomerMapper {
@@ -44,6 +37,7 @@ public class CustomerMapper {
 
         CustomerEntity customerEntity = new CustomerEntity();
 
+        customerEntity.setId(customerItem.getId());
         customerEntity.setFirstName(customerItem.getFirstName());
         customerEntity.setLastName(customerItem.getLastName());
         customerEntity.setAge(customerItem.getAge());

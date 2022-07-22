@@ -1,6 +1,5 @@
 package com.rihards.bookface.controllers;
 
-import com.rihards.bookface.entities.BookRequestEntity;
 import com.rihards.bookface.items.BookRequestItem;
 import com.rihards.bookface.services.BookRequestService;
 import org.springframework.beans.factory.annotation.Autowired;

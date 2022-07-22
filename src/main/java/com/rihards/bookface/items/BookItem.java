@@ -47,7 +47,7 @@ public class BookItem {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         BookItem bookItem = (BookItem) o;
-        return publishingYear == bookItem.publishingYear && publishingYear == bookItem.publishingYear && pages == bookItem.pages && Objects.equals(author, bookItem.author) && Objects.equals(title, bookItem.title);
+        return publishingYear == bookItem.publishingYear && pages == bookItem.pages && Objects.equals(author, bookItem.author) && Objects.equals(title, bookItem.title);
     }
 
     @Override

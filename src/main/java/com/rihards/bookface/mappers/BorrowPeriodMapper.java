@@ -60,6 +60,7 @@ public class BorrowPeriodMapper {
 
         BorrowPeriodEntity borrowPeriodEntity = new BorrowPeriodEntity();
 
+        borrowPeriodEntity.setId(borrowPeriodItem.getId());
         borrowPeriodEntity.setCustomer(customerEntity);
         borrowPeriodEntity.setBook(bookEntity);
         borrowPeriodEntity.setStatus(borrowPeriodItem.getStatus());

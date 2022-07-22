@@ -1,7 +1,5 @@
 package com.rihards.bookface.entities;
 
-
-import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;

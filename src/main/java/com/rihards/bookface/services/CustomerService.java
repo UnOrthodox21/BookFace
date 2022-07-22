@@ -1,20 +1,12 @@
 package com.rihards.bookface.services;
 
-import com.rihards.bookface.entities.BookRequestEntity;
-import com.rihards.bookface.entities.BorrowPeriodEntity;
 import com.rihards.bookface.entities.CustomerEntity;
-import com.rihards.bookface.items.BookRequestItem;
-import com.rihards.bookface.items.BorrowPeriodItem;
 import com.rihards.bookface.items.CustomerItem;
-import com.rihards.bookface.mappers.BookRequestMapper;
-import com.rihards.bookface.mappers.BorrowPeriodMapper;
 import com.rihards.bookface.mappers.CustomerMapper;
-import com.rihards.bookface.repositories.BookRequestRepository;
 import com.rihards.bookface.repositories.CustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -24,16 +16,11 @@ public class CustomerService {
 
     private final CustomerRepository customerRepository;
     private final CustomerMapper customerMapper;
-    private final BorrowPeriodMapper borrowPeriodMapper;
-    private final BookRequestMapper bookRequestMapper;
 
     @Autowired
-    public CustomerService(CustomerRepository customerRepository, CustomerMapper customerMapper,
-                           BorrowPeriodMapper borrowPeriodMapper, BookRequestMapper bookRequestMapper) {
+    public CustomerService(CustomerRepository customerRepository, CustomerMapper customerMapper) {
         this.customerRepository = customerRepository;
         this.customerMapper = customerMapper;
-        this.borrowPeriodMapper = borrowPeriodMapper;
-        this.bookRequestMapper = bookRequestMapper;
     }
 
     public List<CustomerItem> getAllCustomers() {
