@@ -10,7 +10,7 @@ import java.util.Objects;
 public class BookEntity implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
     @Column(name = "author", nullable = false)
@@ -19,13 +19,13 @@ public class BookEntity implements Serializable {
     @Column(name = "title", nullable = false)
     private String title;
 
-    @Column(name = "year", nullable = false)
-    private int year;
+    @Column(name = "publishing_year", nullable = false)
+    private int publishingYear;
 
     @Column(name = "pages", nullable = false)
     private int pages;
 
-    @OneToMany(mappedBy="book")
+    @OneToMany(mappedBy="book", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<BorrowPeriodEntity> borrowPeriods;
 
     public long getId() {
@@ -52,12 +52,12 @@ public class BookEntity implements Serializable {
         this.title = title;
     }
 
-    public int getYear() {
-        return year;
+    public int getPublishingYear() {
+        return publishingYear;
     }
 
-    public void setYear(int year) {
-        this.year = year;
+    public void setPublishingYear(int publishingYear) {
+        this.publishingYear = publishingYear;
     }
 
     public int getPages() {
@@ -81,12 +81,12 @@ public class BookEntity implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         BookEntity that = (BookEntity) o;
-        return id == that.id && year == that.year && pages == that.pages && Objects.equals(author, that.author) && Objects.equals(title, that.title) && Objects.equals(borrowPeriods, that.borrowPeriods);
+        return id == that.id && publishingYear == that.publishingYear && pages == that.pages && Objects.equals(author, that.author) && Objects.equals(title, that.title) && Objects.equals(borrowPeriods, that.borrowPeriods);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, author, title, year, pages, borrowPeriods);
+        return Objects.hash(id, author, title, publishingYear, pages, borrowPeriods);
     }
 
     @Override
@@ -95,7 +95,7 @@ public class BookEntity implements Serializable {
                 "id=" + id +
                 ", author='" + author + '\'' +
                 ", title='" + title + '\'' +
-                ", year=" + year +
+                ", publishingYear=" + publishingYear +
                 ", pages=" + pages +
                 ", borrowPeriods=" + borrowPeriods +
                 '}';

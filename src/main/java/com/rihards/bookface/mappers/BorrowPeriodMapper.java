@@ -35,6 +35,7 @@ public class BorrowPeriodMapper {
         BookItem bookItem = bookMapper.toBookItem(bookEntity);
 
         return new BorrowPeriodItem.Builder()
+                .id(borrowPeriodEntity.getId())
                 .customer(customerItem)
                 .book(bookItem)
                 .status(borrowPeriodEntity.getStatus())

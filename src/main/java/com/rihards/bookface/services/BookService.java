@@ -63,8 +63,8 @@ public class BookService {
             bookEntityToUpdate.setTitle(bookItem.getTitle());
         }
 
-        if(bookItem.getYear() > 0) {
-            bookEntityToUpdate.setYear(bookItem.getYear());
+        if(bookItem.getPublishingYear() > 0) {
+            bookEntityToUpdate.setPublishingYear(bookItem.getPublishingYear());
         }
 
        BookEntity savedBookEntity = bookRepository.save(bookEntityToUpdate);

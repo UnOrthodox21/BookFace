@@ -10,6 +10,7 @@ import java.util.Objects;
 @JsonDeserialize(builder = BorrowPeriodItem.Builder.class)
 public class BorrowPeriodItem {
 
+    private final long id;
     private final CustomerItem customer;
     private final BookItem book;
     private final String status;
@@ -19,12 +20,17 @@ public class BorrowPeriodItem {
 
 
     public BorrowPeriodItem(BorrowPeriodItem.Builder builder) {
+        this.id = builder.id;
         this.customer = builder.customer;
         this.book = builder.book;
         this.status = builder.status;
         this.creationDateAndTime = builder.creationDateAndTime;
         this.startDate = builder.startDate;
         this.endDate = builder.endDate;
+    }
+
+    public long getId() {
+        return id;
     }
 
     public CustomerItem getCustomer() {
@@ -56,17 +62,18 @@ public class BorrowPeriodItem {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         BorrowPeriodItem that = (BorrowPeriodItem) o;
-        return Objects.equals(customer, that.customer) && Objects.equals(book, that.book) && Objects.equals(status, that.status) && Objects.equals(creationDateAndTime, that.creationDateAndTime) && Objects.equals(startDate, that.startDate) && Objects.equals(endDate, that.endDate);
+        return Objects.equals(id, that.id) && Objects.equals(customer, that.customer) && Objects.equals(book, that.book) && Objects.equals(status, that.status) && Objects.equals(creationDateAndTime, that.creationDateAndTime) && Objects.equals(startDate, that.startDate) && Objects.equals(endDate, that.endDate);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(customer, book, status, creationDateAndTime, startDate, endDate);
+        return Objects.hash(id, customer, book, status, creationDateAndTime, startDate, endDate);
     }
 
     @Override
     public String toString() {
         return "BorrowPeriodItem{" +
+                "id=" + id +
                 "customer=" + customer +
                 ", book=" + book +
                 ", status='" + status + '\'' +
@@ -78,6 +85,7 @@ public class BorrowPeriodItem {
 
     @JsonPOJOBuilder(withPrefix = "")
     public static final class Builder {
+        private long id;
         private CustomerItem customer;
         private BookItem book;
         private String status;
@@ -85,7 +93,10 @@ public class BorrowPeriodItem {
         private LocalDate startDate;
         private LocalDate endDate;
 
-        public Builder() {
+
+        public BorrowPeriodItem.Builder id(long id) {
+            this.id = id;
+            return this;
         }
 
         public BorrowPeriodItem.Builder customer(CustomerItem customer) {

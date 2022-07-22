@@ -3,24 +3,27 @@ package com.rihards.bookface.items;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
 
-import java.util.List;
 import java.util.Objects;
 
 @JsonDeserialize(builder = BookItem.Builder.class)
 public class BookItem {
 
+    private final long id;
     private final String author;
     private final String title;
-    private final int year;
+    private final int publishingYear;
     private final int pages;
-    private final List<BorrowPeriodItem> borrowPeriods;
 
     private BookItem(BookItem.Builder builder) {
+        this.id = builder.id;
         this.author = builder.author;
         this.title = builder.title;
-        this.year = builder.year;
-        this.pages = builder.year;
-        this.borrowPeriods = builder.borrowPeriods;
+        this.publishingYear = builder.publishingYear;
+        this.pages = builder.pages;
+    }
+
+    public long getId() {
+        return id;
     }
 
     public String getAuthor() {
@@ -31,16 +34,12 @@ public class BookItem {
         return title;
     }
 
-    public int getYear() {
-        return year;
+    public int getPublishingYear() {
+        return publishingYear;
     }
 
     public int getPages() {
         return pages;
-    }
-
-    public List<BorrowPeriodItem> getBorrowPeriods() {
-        return borrowPeriods;
     }
 
     @Override
@@ -48,36 +47,37 @@ public class BookItem {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         BookItem bookItem = (BookItem) o;
-        return year == bookItem.year && pages == bookItem.pages && Objects.equals(author, bookItem.author) && Objects.equals(title, bookItem.title) && Objects.equals(borrowPeriods, bookItem.borrowPeriods);
+        return publishingYear == bookItem.publishingYear && publishingYear == bookItem.publishingYear && pages == bookItem.pages && Objects.equals(author, bookItem.author) && Objects.equals(title, bookItem.title);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(author, title, year, pages, borrowPeriods);
+        return Objects.hash(id, author, title, publishingYear, pages);
     }
 
     @Override
     public String toString() {
         return "BookItem{" +
+                "id='" + id + '\'' +
                 "author='" + author + '\'' +
                 ", title='" + title + '\'' +
-                ", year=" + year +
+                ", publishingYear=" + publishingYear +
                 ", pages=" + pages +
-                ", borrowPeriods=" + borrowPeriods +
                 '}';
     }
 
     @JsonPOJOBuilder(withPrefix = "")
     public static final class Builder {
+        private long id;
         private String author;
         private String title;
-        private int year;
+        private int publishingYear;
         private int pages;
-        private List<BorrowPeriodItem> borrowPeriods;
 
-        public Builder() {
+        public BookItem.Builder id(long id) {
+            this.id = id;
+            return this;
         }
-
 
         public BookItem.Builder author(String author) {
             this.author = author;
@@ -89,18 +89,13 @@ public class BookItem {
             return this;
         }
 
-        public BookItem.Builder year(int year) {
-            this.year = year;
+        public BookItem.Builder publishingYear(int publishingYear) {
+            this.publishingYear = publishingYear;
             return this;
         }
 
-        public BookItem.Builder pages(int year) {
+        public BookItem.Builder pages(int pages) {
             this.pages = pages;
-            return this;
-        }
-
-        public BookItem.Builder borrowPeriods(List<BorrowPeriodItem> borrowPeriods) {
-            this.borrowPeriods = borrowPeriods;
             return this;
         }
 

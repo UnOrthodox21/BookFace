@@ -27,17 +27,12 @@ public class BookMapper {
             return null;
         }
 
-        List<BorrowPeriodEntity> borrowPeriodEntityList = bookEntity.getBorrowPeriods();
-        List<BorrowPeriodItem> borrowPeriodItemList = borrowPeriodEntityList.stream()
-                .map(borrowPeriodEntity -> borrowPeriodMapper.toBorrowPeriodItem(borrowPeriodEntity))
-                .collect(Collectors.toList());
-
         return new BookItem.Builder()
+                .id(bookEntity.getId())
                 .author(bookEntity.getAuthor())
                 .title(bookEntity.getTitle())
-                .year(bookEntity.getYear())
+                .publishingYear(bookEntity.getPublishingYear())
                 .pages(bookEntity.getPages())
-                .borrowPeriods(borrowPeriodItemList)
                 .build();
     }
 
@@ -48,19 +43,14 @@ public class BookMapper {
             return null;
         }
 
-        List<BorrowPeriodItem> borrowPeriodItemList = bookItem.getBorrowPeriods();
-        List<BorrowPeriodEntity> borrowPeriodsEntityList = borrowPeriodItemList.stream()
-                .map(borrowPeriodItem -> borrowPeriodMapper.toBorrowPeriodEntity(borrowPeriodItem))
-                .collect(Collectors.toList());
-
 
         BookEntity bookEntity = new BookEntity();
 
         bookEntity.setAuthor(bookItem.getAuthor());
         bookEntity.setTitle(bookItem.getTitle());
-        bookEntity.setYear(bookItem.getYear());
+        bookEntity.setPublishingYear(bookItem.getPublishingYear());
         bookEntity.setPages(bookItem.getPages());
-        bookEntity.setBorrowPeriods(borrowPeriodsEntityList);
+
 
         return bookEntity;
     }

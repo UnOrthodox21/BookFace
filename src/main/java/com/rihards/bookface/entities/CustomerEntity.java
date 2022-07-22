@@ -4,7 +4,7 @@ import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.time.LocalDate;
+
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Objects;
@@ -14,7 +14,7 @@ import java.util.Objects;
 public class CustomerEntity implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
     @Column(name = "first_name", nullable = false)
@@ -39,10 +39,10 @@ public class CustomerEntity implements Serializable {
     @CreationTimestamp
     private LocalDateTime dateAndTimeOfRegistration;
 
-    @OneToMany(mappedBy="customer")
+    @OneToMany(mappedBy="customer", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<BorrowPeriodEntity> borrowPeriods;
 
-    @OneToMany(mappedBy="customer")
+    @OneToMany(mappedBy="customer", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<BookRequestEntity> bookRequests;
 
     public long getId() {

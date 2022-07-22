@@ -10,24 +10,30 @@ import java.util.Objects;
 @JsonDeserialize(builder = BookRequestItem.Builder.class)
 public class BookRequestItem {
 
+    private final long id;
     private final CustomerItem customer;
     private final String author;
     private final String title;
-    private final int year;
+    private final int publishingYear;
     private final int pages;
     private final String status;
     private final LocalDateTime creationDateAndTime;
     private final LocalDate endDate;
 
     private BookRequestItem(BookRequestItem.Builder builder) {
+        this.id = builder.id;
         this.customer = builder.customer;
         this.author = builder.author;
         this.title = builder.title;
-        this.year = builder.year;
+        this.publishingYear = builder.publishingYear;
         this.pages = builder.pages;
         this.status = builder.status;
         this.creationDateAndTime = builder.creationDateAndTime;
         this.endDate = builder.endDate;
+    }
+
+    public long getId() {
+        return id;
     }
 
     public CustomerItem getCustomer() {
@@ -42,8 +48,8 @@ public class BookRequestItem {
         return title;
     }
 
-    public int getYear() {
-        return year;
+    public int getPublishingYear() {
+        return publishingYear;
     }
 
     public int getPages() {
@@ -67,21 +73,22 @@ public class BookRequestItem {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         BookRequestItem that = (BookRequestItem) o;
-        return year == that.year && pages == that.pages && Objects.equals(customer, that.customer) && Objects.equals(author, that.author) && Objects.equals(title, that.title) && Objects.equals(status, that.status) && Objects.equals(creationDateAndTime, that.creationDateAndTime) && Objects.equals(endDate, that.endDate);
+        return id == that.id && publishingYear == that.publishingYear && pages == that.pages && Objects.equals(customer, that.customer) && Objects.equals(author, that.author) && Objects.equals(title, that.title) && Objects.equals(status, that.status) && Objects.equals(creationDateAndTime, that.creationDateAndTime) && Objects.equals(endDate, that.endDate);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(customer, author, title, year, pages, status, creationDateAndTime, endDate);
+        return Objects.hash(id, customer, author, title, publishingYear, pages, status, creationDateAndTime, endDate);
     }
 
     @Override
     public String toString() {
         return "BookRequestItem{" +
+                "id=" + id +
                 "customer=" + customer +
                 ", author='" + author + '\'' +
                 ", title='" + title + '\'' +
-                ", year=" + year +
+                ", publishingYear=" + publishingYear +
                 ", pages=" + pages +
                 ", status='" + status + '\'' +
                 ", creationDateAndTime=" + creationDateAndTime +
@@ -91,16 +98,19 @@ public class BookRequestItem {
 
     @JsonPOJOBuilder(withPrefix = "")
     public static final class Builder {
+        private long id;
         private CustomerItem customer;
         private String author;
         private String title;
-        private int year;
+        private int publishingYear;
         private int pages;
         private String status;
         private LocalDateTime creationDateAndTime;
         private LocalDate endDate;
 
-        public Builder() {
+        public BookRequestItem.Builder id(long id) {
+            this.id = id;
+            return this;
         }
 
         public BookRequestItem.Builder customer(CustomerItem customer) {
@@ -118,8 +128,8 @@ public class BookRequestItem {
             return this;
         }
 
-        public BookRequestItem.Builder year(int year) {
-            this.year = year;
+        public BookRequestItem.Builder publishingYear(int publishingYear) {
+            this.publishingYear = publishingYear;
             return this;
         }
 

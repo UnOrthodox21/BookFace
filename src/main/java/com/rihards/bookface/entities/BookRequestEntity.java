@@ -1,6 +1,7 @@
 package com.rihards.bookface.entities;
 
 
+import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
@@ -14,11 +15,11 @@ import java.util.Objects;
 public class BookRequestEntity implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @ManyToOne
-    @JoinColumn(name="customer_id", nullable=false)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name="customer_id")
     private CustomerEntity customer;
 
     @Column(name = "author", nullable = false)
@@ -27,8 +28,8 @@ public class BookRequestEntity implements Serializable {
     @Column(name = "title", nullable = false)
     private String title;
 
-    @Column(name = "year", nullable = false)
-    private int year;
+    @Column(name = "publishing_year", nullable = false)
+    private int publishingYear;
 
     @Column(name = "pages", nullable = false)
     private int pages;
@@ -42,7 +43,6 @@ public class BookRequestEntity implements Serializable {
 
     @Column(name = "end_date")
     private LocalDate endDate;
-
 
     public long getId() {
         return id;
@@ -76,12 +76,12 @@ public class BookRequestEntity implements Serializable {
         this.title = title;
     }
 
-    public int getYear() {
-        return year;
+    public int getPublishingYear() {
+        return publishingYear;
     }
 
-    public void setYear(int year) {
-        this.year = year;
+    public void setPublishingYear(int publishingYear) {
+        this.publishingYear = publishingYear;
     }
 
     public int getPages() {
@@ -121,12 +121,12 @@ public class BookRequestEntity implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         BookRequestEntity that = (BookRequestEntity) o;
-        return id == that.id && year == that.year && pages == that.pages && Objects.equals(customer, that.customer) && Objects.equals(author, that.author) && Objects.equals(title, that.title) && Objects.equals(status, that.status) && Objects.equals(creationDateAndTime, that.creationDateAndTime) && Objects.equals(endDate, that.endDate);
+        return id == that.id && publishingYear == that.publishingYear && pages == that.pages && Objects.equals(customer, that.customer) && Objects.equals(author, that.author) && Objects.equals(title, that.title) && Objects.equals(status, that.status) && Objects.equals(creationDateAndTime, that.creationDateAndTime) && Objects.equals(endDate, that.endDate);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, customer, author, title, year, pages, status, creationDateAndTime, endDate);
+        return Objects.hash(id, customer, author, title, publishingYear, pages, status, creationDateAndTime, endDate);
     }
 
     @Override
@@ -136,7 +136,7 @@ public class BookRequestEntity implements Serializable {
                 ", customer=" + customer +
                 ", author='" + author + '\'' +
                 ", title='" + title + '\'' +
-                ", year=" + year +
+                ", publishingYear=" + publishingYear +
                 ", pages=" + pages +
                 ", status='" + status + '\'' +
                 ", creationDateAndTime=" + creationDateAndTime +

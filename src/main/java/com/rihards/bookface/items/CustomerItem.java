@@ -4,12 +4,12 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
 
 import java.time.LocalDateTime;
-import java.util.List;
 import java.util.Objects;
 
 @JsonDeserialize(builder = CustomerItem.Builder.class)
 public class CustomerItem {
 
+    private final long id;
     private final String firstName;
     private final String lastName;
     private final int age;
@@ -17,10 +17,9 @@ public class CustomerItem {
     private final String phone;
     private final String email;
     private final LocalDateTime dateAndTimeOfRegistration;
-    private final List<BorrowPeriodItem> borrowPeriods;
-    private final List<BookRequestItem> bookRequests;
 
     public CustomerItem(CustomerItem.Builder builder) {
+        this.id = builder.id;
         this.firstName = builder.firstName;
         this.lastName = builder.lastName;
         this.age = builder.age;
@@ -28,10 +27,11 @@ public class CustomerItem {
         this.phone = builder.phone;
         this.email = builder.email;
         this.dateAndTimeOfRegistration = builder.dateAndTimeOfRegistration;
-        this.borrowPeriods = builder.borrowPeriods;
-        this.bookRequests = builder.bookRequests;
     }
 
+    public long getId() {
+        return id;
+    }
 
     public String getFirstName() {
         return firstName;
@@ -61,44 +61,36 @@ public class CustomerItem {
         return dateAndTimeOfRegistration;
     }
 
-    public List<BorrowPeriodItem> getBorrowPeriods() {
-        return borrowPeriods;
-    }
-
-    public List<BookRequestItem> getBookRequests() {
-        return bookRequests;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         CustomerItem that = (CustomerItem) o;
-        return age == that.age && Objects.equals(firstName, that.firstName) && Objects.equals(lastName, that.lastName) && Objects.equals(address, that.address) && Objects.equals(phone, that.phone) && Objects.equals(email, that.email) && Objects.equals(dateAndTimeOfRegistration, that.dateAndTimeOfRegistration) && Objects.equals(borrowPeriods, that.borrowPeriods) && Objects.equals(bookRequests, that.bookRequests);
+        return age == that.age && Objects.equals(firstName, that.firstName) && Objects.equals(lastName, that.lastName) && Objects.equals(address, that.address) && Objects.equals(phone, that.phone) && Objects.equals(email, that.email) && Objects.equals(dateAndTimeOfRegistration, that.dateAndTimeOfRegistration);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(firstName, lastName, age, address, phone, email, dateAndTimeOfRegistration, borrowPeriods, bookRequests);
+        return Objects.hash(id, firstName, lastName, age, address, phone, email, dateAndTimeOfRegistration);
     }
 
     @Override
     public String toString() {
         return "CustomerItem{" +
-                "firstName='" + firstName + '\'' +
+                "id=" + id +
+                ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", age=" + age +
                 ", address='" + address + '\'' +
                 ", phone='" + phone + '\'' +
                 ", email='" + email + '\'' +
                 ", dateAndTimeOfRegistration=" + dateAndTimeOfRegistration +
-                ", borrowPeriods=" + borrowPeriods +
-                ", bookRequests=" + bookRequests +
                 '}';
     }
 
     @JsonPOJOBuilder(withPrefix = "")
     public static final class Builder {
+        private long id;
         private String firstName;
         private String lastName;
         private int age;
@@ -106,10 +98,10 @@ public class CustomerItem {
         private String phone;
         private String email;
         private LocalDateTime dateAndTimeOfRegistration;
-        private List<BorrowPeriodItem> borrowPeriods;
-        private List<BookRequestItem> bookRequests;
 
-        public Builder() {
+        public CustomerItem.Builder id(long id) {
+            this.id = id;
+            return this;
         }
 
         public CustomerItem.Builder firstName(String firstName) {
@@ -144,16 +136,6 @@ public class CustomerItem {
 
         public CustomerItem.Builder dateAndTimeOfRegistration(LocalDateTime dateAndTimeOfRegistration) {
             this.dateAndTimeOfRegistration = dateAndTimeOfRegistration;
-            return this;
-        }
-
-        public CustomerItem.Builder borrowPeriods(List<BorrowPeriodItem> borrowPeriods) {
-            this.borrowPeriods = borrowPeriods;
-            return this;
-        }
-
-        public CustomerItem.Builder bookRequests(List<BookRequestItem> bookRequests) {
-            this.bookRequests = bookRequests;
             return this;
         }
 

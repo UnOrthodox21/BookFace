@@ -30,10 +30,11 @@ public class BookRequestMapper {
 
 
         return new BookRequestItem.Builder()
+                .id(bookRequestEntity.getId())
                 .customer(customerItem)
                 .author(bookRequestEntity.getAuthor())
                 .title(bookRequestEntity.getTitle())
-                .year(bookRequestEntity.getYear())
+                .publishingYear(bookRequestEntity.getPublishingYear())
                 .pages(bookRequestEntity.getPages())
                 .status(bookRequestEntity.getStatus())
                 .creationDateAndTime(bookRequestEntity.getCreationDateAndTime())
@@ -56,7 +57,7 @@ public class BookRequestMapper {
         bookRequestEntity.setCustomer(customerEntity);
         bookRequestEntity.setAuthor(bookRequestItem.getAuthor());
         bookRequestEntity.setTitle(bookRequestItem.getTitle());
-        bookRequestEntity.setYear(bookRequestItem.getYear());
+        bookRequestEntity.setPublishingYear(bookRequestItem.getPublishingYear());
         bookRequestEntity.setPages(bookRequestItem.getPages());
         bookRequestEntity.setStatus(bookRequestItem.getStatus());
         bookRequestEntity.setCreationDateAndTime(bookRequestItem.getCreationDateAndTime());

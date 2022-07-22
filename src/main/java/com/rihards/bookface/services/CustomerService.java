@@ -81,42 +81,20 @@ public class CustomerService {
             customertEntityToUpdate.setAge(customerItem.getAge());
         }
 
-        if(customerItem.getAddress() != "") {
+        if(customerItem.getAddress().equals("")) {
             customertEntityToUpdate.setAddress(customerItem.getAddress());
         }
 
-        if(customerItem.getPhone() != "") {
+        if(customerItem.getPhone().equals("")) {
             customertEntityToUpdate.setPhone(customerItem.getPhone());
         }
 
-        if(customerItem.getEmail() != "") {
+        if(customerItem.getEmail().equals("")) {
             customertEntityToUpdate.setEmail(customerItem.getEmail());
         }
 
         if(customerItem.getDateAndTimeOfRegistration() != null) {
             customertEntityToUpdate.setDateAndTimeOfRegistration(customerItem.getDateAndTimeOfRegistration());
-        }
-
-
-
-        if(customerItem.getBorrowPeriods() != null) {
-
-            List<BorrowPeriodItem> borrowPeriodItemList = customerItem.getBorrowPeriods();
-            List<BorrowPeriodEntity> borrowPeriodEntityList = borrowPeriodItemList.stream()
-                    .map(borrowPeriodItem -> borrowPeriodMapper.toBorrowPeriodEntity(borrowPeriodItem))
-                    .collect(Collectors.toList());
-
-            customertEntityToUpdate.setBorrowPeriods(borrowPeriodEntityList);
-        }
-
-
-        if(customerItem.getBookRequests() != null) {
-            List<BookRequestItem> bookRequestItemList = customerItem.getBookRequests();
-            List<BookRequestEntity> bookRequestEntityList = bookRequestItemList.stream()
-                    .map(bookRequestItem -> bookRequestMapper.toBookRequestEntity(bookRequestItem))
-                    .collect(Collectors.toList());
-
-            customertEntityToUpdate.setBookRequests(bookRequestEntityList);
         }
 
 
