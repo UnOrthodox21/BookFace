@@ -70,11 +70,11 @@ public class BookRequestService {
             bookRequestEntityToUpdate.setCustomer(customerEntity);
         }
 
-        if(bookRequestItem.getAuthor() != "") {
+        if(!bookRequestItem.getAuthor().equals("")) {
             bookRequestEntityToUpdate.setAuthor(bookRequestItem.getAuthor());
         }
 
-        if(bookRequestItem.getTitle() != "") {
+        if(!bookRequestItem.getTitle().equals("")) {
             bookRequestEntityToUpdate.setTitle(bookRequestItem.getTitle());
         }
 
@@ -86,7 +86,7 @@ public class BookRequestService {
             bookRequestEntityToUpdate.setPages(bookRequestItem.getPages());
         }
 
-        if(bookRequestItem.getStatus() != "") {
+        if(!bookRequestItem.getStatus().equals("")) {
             bookRequestEntityToUpdate.setStatus(bookRequestItem.getStatus());
         }
 

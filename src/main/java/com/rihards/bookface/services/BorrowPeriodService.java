@@ -68,7 +68,7 @@ public class BorrowPeriodService {
             borrowPeriodEntityToUpdate.setCreationDateAndTime(borrowPeriodItem.getCreationDateAndTime());
         }
 
-        if(borrowPeriodItem.getStatus() != "") {
+        if(!borrowPeriodItem.getStatus().equals("")) {
             borrowPeriodEntityToUpdate.setStatus(borrowPeriodItem.getStatus());
         }
 

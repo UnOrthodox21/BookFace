@@ -55,11 +55,11 @@ public class BookService {
     public BookItem updateBookById(long bookId, BookItem bookItem) {
         BookEntity bookEntityToUpdate = bookRepository.findById(bookId).get();
 
-        if(bookItem.getAuthor() != "") {
+        if(!bookItem.getAuthor().equals("")) {
             bookEntityToUpdate.setAuthor(bookItem.getAuthor());
         }
 
-        if(bookItem.getTitle() != "") {
+        if(!bookItem.getTitle().equals("")) {
             bookEntityToUpdate.setTitle(bookItem.getTitle());
         }
 

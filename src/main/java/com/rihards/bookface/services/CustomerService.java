@@ -69,11 +69,11 @@ public class CustomerService {
         CustomerEntity customertEntityToUpdate = customerRepository.findById(customerId).get();
 
 
-        if(customerItem.getFirstName() != "") {
+        if(!customerItem.getFirstName().equals("")) {
             customertEntityToUpdate.setFirstName(customerItem.getFirstName());
         }
 
-        if(customerItem.getLastName() != "") {
+        if(!customerItem.getLastName().equals("")) {
             customertEntityToUpdate.setLastName(customerItem.getLastName());
         }
 
@@ -81,15 +81,15 @@ public class CustomerService {
             customertEntityToUpdate.setAge(customerItem.getAge());
         }
 
-        if(customerItem.getAddress().equals("")) {
+        if(!customerItem.getAddress().equals("")) {
             customertEntityToUpdate.setAddress(customerItem.getAddress());
         }
 
-        if(customerItem.getPhone().equals("")) {
+        if(!customerItem.getPhone().equals("")) {
             customertEntityToUpdate.setPhone(customerItem.getPhone());
         }
 
-        if(customerItem.getEmail().equals("")) {
+        if(!customerItem.getEmail().equals("")) {
             customertEntityToUpdate.setEmail(customerItem.getEmail());
         }
 
