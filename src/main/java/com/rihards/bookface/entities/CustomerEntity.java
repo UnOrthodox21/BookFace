@@ -39,10 +39,10 @@ public class CustomerEntity implements Serializable {
     @CreationTimestamp
     private LocalDateTime dateAndTimeOfRegistration;
 
-    @OneToMany(mappedBy="customer", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy="customer", cascade = CascadeType.MERGE, orphanRemoval = true)
     private List<BorrowPeriodEntity> borrowPeriods;
 
-    @OneToMany(mappedBy="customer", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy="customer", cascade = CascadeType.MERGE, orphanRemoval = true)
     private List<BookRequestEntity> bookRequests;
 
     public long getId() {

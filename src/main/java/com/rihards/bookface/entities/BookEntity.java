@@ -25,7 +25,7 @@ public class BookEntity implements Serializable {
     @Column(name = "pages", nullable = false)
     private int pages;
 
-    @OneToMany(mappedBy="book", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy="book", cascade = CascadeType.MERGE, orphanRemoval = true)
     private List<BorrowPeriodEntity> borrowPeriods;
 
     public long getId() {
