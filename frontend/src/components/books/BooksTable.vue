@@ -10,7 +10,6 @@
       <th scope="col">Title</th>
       <th scope="col">Publishing year</th>
       <th scope="col">Pages</th>
-      <th scope="col">Borrow periods</th>
        <th scope="col">Actions</th>
     </tr>
   </thead>
@@ -21,7 +20,6 @@
       <td> {{ book.title }}</td>
       <td>{{ book.publishingYear}}</td>
       <td>{{ book.pages }}</td>
-       <td>{{ book.borrowPeriods }}</td>
      
       <td><router-link  to="/home" type="button" class="btn btn-outline-success mx-2"> Borrow </router-link>
         <button  type="button" class="btn btn-outline-info mx-2" data-toggle="modal" > Edit </button>

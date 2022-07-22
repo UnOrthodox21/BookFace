@@ -12,8 +12,6 @@
       <th scope="col">Phone</th>
       <th scope="col">E-mail</th>
       <th scope="col">Time of registration</th>
-      <th scope="col">Borrow periods</th>
-      <th scope="col">Book requests</th>
       <th scope="col">Actions</th>
     </tr>
   </thead>
@@ -27,8 +25,6 @@
       <td>{{ customer.phone }}</td>
       <td>{{ customer.email }}</td>
       <td>{{ customer.dateAndTimeOfRegistration }}</td>
-      <td>{{ customer.borrowPeriods }}</td>
-      <td>{{ customer.bookRequests }}</td>
 
      <td>
      <button  type="button" class="btn btn-outline-info mx-2" data-toggle="modal" > Edit </button>
