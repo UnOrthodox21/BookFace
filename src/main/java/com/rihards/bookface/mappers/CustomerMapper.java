@@ -24,7 +24,7 @@ public class CustomerMapper {
                 .address(customerEntity.getAddress())
                 .phone(customerEntity.getPhone())
                 .email(customerEntity.getEmail())
-                .dateAndTimeOfRegistration(customerEntity.getDateOfRegistration())
+                .dateAndTimeOfRegistration(customerEntity.getDateAndTimeOfRegistration())
                 .build();
     }
 

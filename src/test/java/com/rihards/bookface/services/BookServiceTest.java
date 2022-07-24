@@ -11,6 +11,12 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+
+import static org.mockito.Mockito.*;
+
 
 @ExtendWith(SpringExtension.class)
 public class BookServiceTest {
@@ -22,90 +28,138 @@ public class BookServiceTest {
     private BookMapper bookMapper;
 
     @InjectMocks
-    private BookService bookService;
+    BookService bookService;
 
-    private BookEntity bookEntity;
-    private BookItem bookItem;
+    BookEntity bookEntity = new BookEntity();
+    BookItem bookItem = new BookItem.Builder().build();
+
 
     @BeforeEach
     public void setup() {
-//        bookEntity = getBookEntity();
+        bookEntity = getBookEntity();
         bookItem = getBookItem();
     }
 
     @Test
     void testGetAllBooks() {
 
-        // Setup
+        List<BookEntity> bookEntityList = new ArrayList<BookEntity>();
+        bookEntityList.add(bookEntity);
+
+        // Mock
+        when(bookRepository.findAll()).thenReturn(bookEntityList);
+        when(bookMapper.toBookEntity(bookItem)).thenReturn(bookEntity);
+        when(bookMapper.toBookItem(bookEntity)).thenReturn(bookItem);
 
         // Perform
+        List<BookItem> foundBookItemList = bookService.getAllBooks();
+        BookItem firstFoundBookItem = foundBookItemList.get(0);
 
         // Assert
-
-        // Verify
+        assert (foundBookItemList.size() == 1);
+        assert (firstFoundBookItem.getId() == bookItem.getId());
+        assert (firstFoundBookItem.getAuthor()).equals(bookItem.getAuthor());
+        assert (firstFoundBookItem.getTitle()).equals(bookItem.getTitle());
+        assert (firstFoundBookItem.getPages() == bookItem.getPages());
+        assert (firstFoundBookItem.getPublishingYear() == bookItem.getPublishingYear());
 
     }
 
     @Test
     void testGetBookByBookId() {
 
-        // Setup
-//    when(bookRepository.findById()).thenReturn(Optional.ofNullable(bookEntity))
+        // Mock
+        when(bookRepository.findById(bookEntity.getId())).thenReturn(Optional.of(bookEntity));
+        when(bookMapper.toBookEntity(bookItem)).thenReturn(bookEntity);
+        when(bookMapper.toBookItem(bookEntity)).thenReturn(bookItem);
+
         // Perform
+        Optional<BookItem> foundBookItem = bookService.getBookByBookId(bookEntity.getId());
 
         // Assert
+        assert (foundBookItem.get().getId() == bookItem.getId());
+        assert (foundBookItem.get().getAuthor()).equals(bookItem.getAuthor());
+        assert (foundBookItem.get().getTitle()).equals(bookItem.getTitle());
+        assert (foundBookItem.get().getPages() == bookItem.getPages());
+        assert (foundBookItem.get().getPublishingYear() == bookItem.getPublishingYear());
 
         // Verify
+        verify(bookRepository, times(1)).findById(bookEntity.getId());
 
     }
 
     @Test
     void testCreateBook() {
 
-        // Setup
+        // Mock
+        when(bookRepository.save(bookEntity)).thenReturn(bookEntity);
+        when(bookMapper.toBookEntity(bookItem)).thenReturn(bookEntity);
+        when(bookMapper.toBookItem(bookEntity)).thenReturn(bookItem);
 
         // Perform
+        BookItem createdBookItem = bookService.createBook(bookItem);
 
         // Assert
+        assert (createdBookItem.getTitle()).equals(bookItem.getTitle());
+
 
         // Verify
+        verify(bookRepository, times(1)).save(bookEntity);
 
     }
 
     @Test
     void testDeleteBookById() {
 
-        // Setup
-
         // Perform
-
-        // Assert
+        bookService.deleteBookById(bookEntity.getId());
 
         // Verify
+        verify(bookRepository, times(1)).deleteById(bookEntity.getId());
 
     }
 
     @Test
     void testUpdateBookById() {
 
-        // Setup
+        // Mock
+        when(bookRepository.findById(bookEntity.getId())).thenReturn(Optional.of(bookEntity));
+        when(bookRepository.save(bookEntity)).thenReturn(bookEntity);
+        when(bookMapper.toBookEntity(bookItem)).thenReturn(bookEntity);
+        when(bookMapper.toBookItem(bookEntity)).thenReturn(bookItem);
 
         // Perform
+        BookItem updatedBookItem = bookService.updateBookById(bookItem.getId(), bookItem);
 
         // Assert
+        assert (updatedBookItem.getTitle()).equals(bookItem.getTitle());
 
         // Verify
+        verify(bookRepository, times(1)).save(bookEntity);
 
     }
 
     // Helper functions
 
+    private BookEntity getBookEntity() {
+        BookEntity bookEntity = new BookEntity();
+        bookEntity.setId(6L);
+        bookEntity.setAuthor("Test Author");
+        bookEntity.setTitle("Test Title");
+        bookEntity.setPublishingYear(1923);
+        bookEntity.setPages(345);
+        return bookEntity;
+    }
 
-//    public BookEntity getBookEntity() {
-//    }
-
-    public BookItem getBookItem() {
-        return new BookItem.Builder().id(6L).author("Test Author").title("Test Title").pages(65).publishingYear(1952).build();
+    private BookItem getBookItem() {
+        return new BookItem
+                .Builder()
+                .id(6L)
+                .author("Test Author")
+                .title("Test Title")
+                .publishingYear(1923)
+                .pages(345)
+                .build();
     }
 
 }

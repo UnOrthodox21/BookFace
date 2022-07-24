@@ -4,7 +4,6 @@ import com.rihards.bookface.entities.BookEntity;
 import com.rihards.bookface.items.BookItem;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
@@ -12,19 +11,19 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 @ExtendWith(MockitoExtension.class)
 public class BookMapperTest {
 
-    @Mock
-    BookMapper bookMapper;
+
+    private BookMapper bookMapper = new BookMapper();
 
     @Test
     void testToBookItem() {
 
-        // setup
+        // Setup
         BookEntity bookEntity = new BookEntity();
         bookEntity.setId(6L);
         bookEntity.setAuthor("Test Author");
-        bookEntity.setTitle("Test book");
-        bookEntity.setPublishingYear(1952);
-        bookEntity.setPages(320);
+        bookEntity.setTitle("Test Title");
+        bookEntity.setPublishingYear(1923);
+        bookEntity.setPages(345);
 
         // Perform
         BookItem bookItem = bookMapper.toBookItem(bookEntity);
@@ -41,6 +40,7 @@ public class BookMapperTest {
     @Test
     void testToBookEntity() {
 
+        // Setup
         BookItem bookItem = new BookItem.Builder()
                 .id(6L)
                 .author("Test Author")

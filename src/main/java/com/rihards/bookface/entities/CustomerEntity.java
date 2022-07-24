@@ -101,7 +101,7 @@ public class CustomerEntity implements Serializable {
         this.email = email;
     }
 
-    public LocalDateTime getDateOfRegistration() {
+    public LocalDateTime getDateAndTimeOfRegistration() {
         return dateAndTimeOfRegistration;
     }
 
